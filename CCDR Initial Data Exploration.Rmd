@@ -1,0 +1,34 @@
+---
+title: "CCDR Inital Data Exploration"
+author: "Ben Culberson"
+date: "4/1/2022"
+output: pdf_document
+---
+
+```{r Libraries }
+library(tidyverse)
+library(lubridate)
+library(agricolae)
+library(ggplot2)
+library(zoo)
+library(trend)
+```
+```{r}
+CCDR_transposed<-read.csv(
+  "../Shapiro_DeAngeli_Culberson_ENV872_EDA_FinalProject/Raw Data/Transposed CCDR.csv",
+                             stringsAsFactors = TRUE)
+CCDR_transposed$Year <- lubridate::ymd(CCDR_transposed$Year , truncated = 2L)
+```
+
+```{r}
+mytheme <- theme_classic(base_size = 14) +
+  theme(axis.text = element_text(color = "black"), 
+        legend.position = "right")
+
+theme_set(mytheme)
+```
+
+
+
+
+
