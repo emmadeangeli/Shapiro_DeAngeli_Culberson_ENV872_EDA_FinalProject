@@ -12,20 +12,20 @@ library(agricolae)
 library(ggplot2)
 library(zoo)
 library(trend)
-```
-```{r}
-CCDR_transposed<-read.csv(
-  "../Shapiro_DeAngeli_Culberson_ENV872_EDA_FinalProject/Raw Data/Transposed CCDR.csv",
-                             stringsAsFactors = TRUE)
-CCDR_transposed$Year <- lubridate::ymd(CCDR_transposed$Year , truncated = 2L)
+library(readxl)
 ```
 
 ```{r}
-mytheme <- theme_classic(base_size = 14) +
-  theme(axis.text = element_text(color = "black"), 
-        legend.position = "right")
+GFD_Raw <- as.data.frame(read_excel("~/EDA Final Project/Data/Raw/GFD Raw.xlsx"))
 
-theme_set(mytheme)
+names <- GFD_Raw$`Series Name`
+
+# transpose all but the first column (name)
+GFD_t <- as.data.frame(t(GFD_Raw[,-3]))
+colnames(GFD_t) <- names
+GFD_t$myfactor <- factor(row.names(GFD_t))
+
+#GFD_t <- t(GFD_Raw)
 ```
 
 
