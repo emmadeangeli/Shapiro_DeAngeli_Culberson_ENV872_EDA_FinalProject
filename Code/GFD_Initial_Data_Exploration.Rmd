@@ -16,7 +16,8 @@ library(readxl)
 ```
 
 ```{r}
-GFD_Raw <- as.data.frame(read_excel("~/EDA Final Project/Data/Raw/GFD Raw.xlsx"))
+
+GFD_Raw <- as.data.frame(read_excel("~/Environmental Data Analytics/Final Project/Data/Raw/GFD Raw.xlsx"))
 
 names <- GFD_Raw$`Series Name`
 
