@@ -1,7 +1,7 @@
 ---
-title: "CCDR Inital Data Exploration"
-author: "Ben Culberson"
-date: "4/1/2022"
+title: "Global Financial Data Initial Exploration"
+author: "Emma DeAngeli"
+date: "4/4/2022"
 output: pdf_document
 ---
 
@@ -13,20 +13,27 @@ library(ggplot2)
 library(zoo)
 library(trend)
 library(readxl)
+library(dplyr)
+```
+
+```{r readdata}
+GFD_Raw <- as.data.frame(read_excel("~/Environmental Data Analytics/Final Project/Data/Raw/GFD Raw.xlsx"))
+
+GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)', credit.to.gdp = 'Credit to government and state-owned enterprises to GDP (%)', credit.to.private = 'Domestic credit to private sector (% of GDP)')
+
 ```
 
 ```{r}
+#4
+plot1 <-
+  ggplot(GFD_Raw, aes(x = Year, y = po4, color = lakename)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, col = "black") +
+  labs(x = "TP (ug/L)", y = "PO4 (ug/L)") + 
+  xlim(0, 100) +
+  ylim(0, 40)
+print(phos)
 
-GFD_Raw <- as.data.frame(read_excel("~/Environmental Data Analytics/Final Project/Data/Raw/GFD Raw.xlsx"))
-
-names <- GFD_Raw$`Series Name`
-
-# transpose all but the first column (name)
-GFD_t <- as.data.frame(t(GFD_Raw[,-3]))
-colnames(GFD_t) <- names
-GFD_t$myfactor <- factor(row.names(GFD_t))
-
-#GFD_t <- t(GFD_Raw)
 ```
 
 
