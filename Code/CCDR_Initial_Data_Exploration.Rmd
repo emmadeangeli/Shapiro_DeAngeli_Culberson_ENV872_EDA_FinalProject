@@ -1,5 +1,5 @@
 ---
-title: "CCDR Inital Data Exploration"
+title: "CCDR Initial Data Exploration"
 author: "Ben Culberson"
 date: "4/1/2022"
 output: pdf_document
@@ -12,10 +12,11 @@ library(agricolae)
 library(ggplot2)
 library(zoo)
 library(trend)
+library(cowplot)
 ```
 ```{r}
 CCDR_transposed<-read.csv(
-  "../Shapiro_DeAngeli_Culberson_ENV872_EDA_FinalProject/Raw Data/Transposed CCDR.csv",
+  "../Data/Raw/Transposed_CCDR.csv",
                              stringsAsFactors = TRUE)
 CCDR_transposed$Year <- lubridate::ymd(CCDR_transposed$Year , truncated = 2L)
 ```
