@@ -16,7 +16,7 @@ library(readxl)
 library(dplyr)
 ```
 
-```{r readdata}
+```{r clean}
 GFD_Raw <- as.data.frame(read_excel("~/Environmental Data Analytics/Final Project/Data/Raw/GFD Raw.xlsx"))
 
 GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)', credit.to.gdp = 'Credit to government and state-owned enterprises to GDP (%)', credit.to.private = 'Domestic credit to private sector (% of GDP)')
@@ -24,6 +24,11 @@ GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)',
 GFD_renamed$Year <- lubridate::ymd(GFD_renamed$Year, truncated = 2L)
 
 ```
+
+```{r writecsv}
+write.csv(GFD_renamed, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
+```
+
 
 ```{r}
 plot1 <-
