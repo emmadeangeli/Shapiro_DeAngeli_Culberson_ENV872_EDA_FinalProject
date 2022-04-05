@@ -16,10 +16,10 @@ library(cowplot)
 ```
 
 ```{r}
-CCDR_transposed<-read.csv(
-  "../Data/Raw/Transposed_CCDR.csv",
+CCDR_transposed_Japan<-read.csv(
+  "../Data/Raw/Transposed_CCDR_Japan.csv",
                              stringsAsFactors = TRUE)
-CCDR_transposed$Year <- lubridate::ymd(CCDR_transposed$Year , truncated = 2L)
+CCDR_transposed_Japan$Year <- lubridate::ymd(CCDR_transposed_Japan$Year , truncated = 2L)
 ```
 
 ```{r}
