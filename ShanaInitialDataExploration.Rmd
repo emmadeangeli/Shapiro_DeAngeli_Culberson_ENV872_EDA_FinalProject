@@ -1,0 +1,36 @@
+---
+title: "Shana Inital Data Exploration"
+author: "Shana Shapiro"
+date: "4/4/2022"
+output: pdf_document
+---
+
+```{r Libraries }
+library(tidyverse, quietly = TRUE)
+library(lubridate)
+library(agricolae)
+library(ggplot2)
+library(zoo)
+library(trend)
+```
+
+
+```{r data.wrangle}
+#the_url <- 'https://databank.worldbank.org/source/country-climate-and-development-report-(ccdr)'
+#download for Japan
+
+
+```
+
+```{r}
+mytheme <- theme_classic(base_size = 14) +
+  theme(axis.text = element_text(color = "black"), 
+        legend.position = "right")
+
+theme_set(mytheme)
+```
+
+
+
+
+
