@@ -35,7 +35,11 @@ mytheme <- theme_classic(base_size = 14) +
 theme_set(mytheme)
 ```
 
+```{r writecsv}
+# write.csv(clean_CCDR_Japan, file = "../Data/Processed/CCDR_processed.csv", row.names=FALSE)
 
+# for when you're ready to make it a csv!
+```
 
 
 
