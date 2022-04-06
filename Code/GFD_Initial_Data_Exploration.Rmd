@@ -17,7 +17,7 @@ library(dplyr)
 ```
 
 ```{r clean}
-GFD_Raw <- as.data.frame(read_excel("~/Environmental Data Analytics/Final Project/Data/Raw/GFD Raw.xlsx"))
+GFD_Raw <- as.data.frame(read_excel("../Data/Raw/GFD Raw.xlsx"))
 
 GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)', credit.to.gdp = 'Credit to government and state-owned enterprises to GDP (%)', credit.to.private = 'Domestic credit to private sector (% of GDP)')
 

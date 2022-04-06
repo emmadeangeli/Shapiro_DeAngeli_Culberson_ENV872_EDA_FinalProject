@@ -20,6 +20,11 @@ CCDR_transposed_Japan<-read.csv(
   "../Data/Raw/Transposed_CCDR_Japan.csv",
                              stringsAsFactors = TRUE)
 CCDR_transposed_Japan$Year <- lubridate::ymd(CCDR_transposed_Japan$Year , truncated = 2L)
+colnames(CCDR_transposed_Japan)
+```
+
+```{r}
+clean_CCDR_Japan<-rename(CCDR_transposed_Japan, 'Total Building Sector Mt CO2 Emissions'= CO2.emissions.by.sector..Mt.CO2.eq....Building, 'Total Bunker Fuels Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Bunker.Fuels, 'Total Electricity/Heat Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Electricity.Heat, 'Total Energy Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Energy, 'Total Fugitive Emissions Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Fugitive.Emissions, 'Total Industrial Processes Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Industrial.Processes, 'Total Land Use/Forestry Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Land.Use.Change.and.Forestry, 'Total Manufacturing/Construction Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Manufacturing.Construction, 'Total Other Fuel Combustion Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Other.Fuel.Combustion, 'Total Transportation Sector Mt CO2 Emissions' = CO2.emissions.by.sector..Mt.CO2.eq....Transportation, 'Annual GHG Growth' = GHG.growth..annual...,'Government Effectiveness Estimate' = Government.Effectiveness..Estimate, 'Per Capita Mt GHG Emissions' = Per.capita.GHG.emissions..tons.capita., 'Regulatory Quality Estimate' = Regulatory.Quality..Estimate, 'Rule of Law Estimate' = Rule.of.Law..Estimate, 'Share of Surface Occupied by Forest' = Share.of.surface.occupied.by.forest....of.total.)
 ```
 
 ```{r}
