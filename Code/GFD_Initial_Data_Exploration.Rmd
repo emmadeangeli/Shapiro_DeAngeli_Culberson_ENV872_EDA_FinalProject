@@ -1,7 +1,7 @@
 ---
-title: "CCDR Inital Data Exploration"
-author: "Ben Culberson"
-date: "4/1/2022"
+title: "Global Financial Data Initial Exploration"
+author: "Emma DeAngeli"
+date: "4/4/2022"
 output: pdf_document
 ---
 
@@ -13,22 +13,52 @@ library(ggplot2)
 library(zoo)
 library(trend)
 library(readxl)
+library(dplyr)
+```
+
+```{r clean}
+GFD_Raw <- as.data.frame(read_excel("../Data/Raw/GFD Raw.xlsx"))
+
+GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)', credit.to.gdp = 'Credit to government and state-owned enterprises to GDP (%)', credit.to.private = 'Domestic credit to private sector (% of GDP)')
+
+GFD_renamed$Year <- lubridate::ymd(GFD_renamed$Year, truncated = 2L)
+
+```
+
+```{r writecsv}
+write.csv(GFD_renamed, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
+```
+
+
+```{r}
+plot1 <-
+  ggplot(GFD_renamed, aes(x = Year, y = assets.to.gdp)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, col = "red") +
+  labs(x = "Year", y = "Bank Assets to GDP (%)")
+print(plot1)
+
 ```
 
 ```{r}
-GFD_Raw <- as.data.frame(read_excel("~/EDA Final Project/Data/Raw/GFD Raw.xlsx"))
+plot2 <-
+  ggplot(GFD_renamed, aes(x = Year, y = credit.to.gdp)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, col = "red") +
+  labs(x = "Year", y = "Credit to GDP (%)")
+print(plot2)
 
-names <- GFD_Raw$`Series Name`
-
-# transpose all but the first column (name)
-GFD_t <- as.data.frame(t(GFD_Raw[,-3]))
-colnames(GFD_t) <- names
-GFD_t$myfactor <- factor(row.names(GFD_t))
-
-#GFD_t <- t(GFD_Raw)
 ```
 
+```{r}
+plot3 <-
+  ggplot(GFD_renamed, aes(x = Year, y = credit.to.private)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, col = "red") +
+  labs(x = "Year", y = "Domestic Credit to Private Sector (% GDP)")
+print(plot3)
 
+```
 
 
 
