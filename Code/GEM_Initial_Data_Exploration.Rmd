@@ -18,8 +18,6 @@ library(trend)
 ```{r data.wrangle}
 #the_url <- 'https://databank.worldbank.org/source/country-climate-and-development-report-(ccdr)'
 #download for Japan
-
-
 ```
 
 ```{r}
@@ -31,6 +29,12 @@ theme_set(mytheme)
 ```
 
 
+```{r}
+library(readr)
+GEM_raw <- read.csv('../Data/Raw/Japan_GEM_Data.csv', stringsAsFactors = TRUE)\
+
+
+```
 
 
 
