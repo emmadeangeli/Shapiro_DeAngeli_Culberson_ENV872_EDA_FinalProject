@@ -1,6 +1,6 @@
 ---
 title: "Our Time Series Analysis"
-author: "Emma DeAngeli"
+author: "Shana Shapiro, Emma DeAngeli, and Ben Culberson"
 date: "4/8/2022"
 output: html_document
 ---
