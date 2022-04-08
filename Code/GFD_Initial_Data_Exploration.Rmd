@@ -23,10 +23,16 @@ GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)',
 
 GFD_renamed$Year <- lubridate::ymd(GFD_renamed$Year, truncated = 2L)
 
+GFD_clean <- select(GFD_renamed, Year, assets.to.gdp, credit.to.private)
+
+GFD_clean <- GFD_clean[2:11,]
+  
+# 2009 - 2018, delete credit column
+
 ```
 
 ```{r writecsv}
-write.csv(GFD_renamed, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
+write.csv(GFD_clean, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
 ```
 
 
@@ -40,23 +46,14 @@ print(plot1)
 
 ```
 
+
 ```{r}
 plot2 <-
-  ggplot(GFD_renamed, aes(x = Year, y = credit.to.gdp)) +
-  geom_point() +
-  geom_smooth(method = lm, se = FALSE, col = "red") +
-  labs(x = "Year", y = "Credit to GDP (%)")
-print(plot2)
-
-```
-
-```{r}
-plot3 <-
   ggplot(GFD_renamed, aes(x = Year, y = credit.to.private)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE, col = "red") +
   labs(x = "Year", y = "Domestic Credit to Private Sector (% GDP)")
-print(plot3)
+print(plot2)
 
 ```
 
