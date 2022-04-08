@@ -9,24 +9,8 @@ output: html_document
 
 This exercise accompanies the lessons in Environmental Data Analytics on time series analysis. 
 
-## Directions
-1. Change "Student Name" on line 3 (above) with your name.
-2. Work through the steps, **creating code and output** that fulfill each instruction.
-3. Be sure to **answer the questions** in this assignment document.
-4. When you have completed the assignment, **Knit** the text and code into a single PDF file.
-5. After Knitting, submit the completed exercise (PDF file) to the dropbox in Sakai. Add your last name into the file name (e.g., "Fay_A07_TimeSeries.Rmd") prior to submission.
-
-The completed exercise is due on Monday, March 14 at 7:00 pm.
-
-## Set up 
-1. Set up your session:
-
-* Check your working directory
-* Load the tidyverse, lubridate, zoo, and trend packages
-* Set your ggplot theme
 
 ```{r}
-#1
 getwd()
 library(tidyverse)
 library(lubridate)
@@ -42,19 +26,17 @@ theme_set(mytheme)
 ```
 
 
-2. Import the ten datasets from the Ozone_TimeSeries folder in the Raw data folder. These contain ozone concentrations at Garinger High School in North Carolina from 2010-2019 (the EPA air database only allows downloads for one year at a time). Import these either individually or in bulk and then combine them into a single dataframe named `GaringerOzone` of 3589 observation and 20 variables. 
-
 ```{r, message = FALSE}
-#2
-CCDR.data <- read.csv(file="../Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2010_raw.csv",
+
+Forest_Share_Japan.data <- read.csv(file="../Data/Processed/Forest_Share_Japan.csv",
                    header=TRUE, stringsAsFactors = TRUE)
-GEM.data <- read.csv(file="../Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2011_raw.csv",
+GEM.data <- read.csv(file="../Data/Processed/GEM_processed.csv",
                    header=TRUE, stringsAsFactors = TRUE)
-GFD.data <- read.csv(file="../Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2012_raw.csv",
+GFD.data <- read.csv(file="../Data/Processed/GFD_processed.csv",
                    header=TRUE, stringsAsFactors = TRUE)
 
 
-GaringerOzone_before <- rbind(EPA.10, EPA.11, EPA.12, EPA.13, EPA.14, EPA.15, EPA.16, EPA.17, EPA.18, EPA.19)
+our.df <- rbind(Forest_Share_Japan.data, GEM.data, GFD.data)
 
 ```
 
