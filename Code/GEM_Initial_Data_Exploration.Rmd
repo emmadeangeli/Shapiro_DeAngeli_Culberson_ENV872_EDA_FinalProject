@@ -92,6 +92,9 @@ GEM_processed$Stock <- as.numeric(GEM_processed$Stock)
 GEM_processed$Reserves <- as.numeric(GEM_processed$Reserves)
 GEM_processed$Unemployment <- as.numeric(GEM_processed$Unemployment)
 
+#2009-2018
+GEM_processed <- GEM_processed[c(2:11),]
+
 #str(GEM_processed)
 
 ```
@@ -117,6 +120,10 @@ plot2 <-
   geom_smooth(method = lm, se = FALSE, col = "blue") +
   labs(x = "Year", y = "Unemployment")
 plot2
+```
 
 
+```{r}
+#countries 
+#japan, phillipines, sri lanka, 
 ```
