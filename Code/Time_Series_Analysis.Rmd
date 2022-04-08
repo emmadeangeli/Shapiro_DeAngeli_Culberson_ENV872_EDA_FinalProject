@@ -17,6 +17,7 @@ library(lubridate)
 library(zoo)
 library(trend)
 library(ggplot2)
+library(dplyr)
 
 mytheme <- theme_classic(base_size = 14) +
   theme(axis.text = element_text(color = "black"), 
@@ -36,7 +37,8 @@ GFD.data <- read.csv(file="../Data/Processed/GFD_processed.csv",
                    header=TRUE, stringsAsFactors = TRUE)
 
 
-our.df <- rbind(Forest_Share_Japan.data, GEM.data, GFD.data)
+our.df <- cbind(Forest_Share_Japan.data, GEM.data, GFD.data)
+our.df <- select(our.df, Share.of.Surface.Occupied.by.Forest, Country, Exports:credit.to.private)
 
 ```
 
