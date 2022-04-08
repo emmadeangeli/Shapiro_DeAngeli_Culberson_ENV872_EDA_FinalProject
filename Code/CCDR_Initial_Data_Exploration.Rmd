@@ -32,7 +32,7 @@ clean_CCDR_Japan<-rename(CCDR_transposed_Japan, 'Total Building Sector Mt CO2 Em
 ```{r}
 #Filter for 2009-2018
 clean_CCDR_Japan_filtered <- clean_CCDR_Japan[4:13,]
-view(clean_CCDR_Japan_filtered)
+#view(clean_CCDR_Japan_filtered)
 ```
 
 ```{r}
