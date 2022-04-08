@@ -23,6 +23,9 @@ GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)',
 
 GFD_renamed$Year <- lubridate::ymd(GFD_renamed$Year, truncated = 2L)
 
+GFD_renamed 
+# 2009 - 2018, delete credit column
+
 ```
 
 ```{r writecsv}
