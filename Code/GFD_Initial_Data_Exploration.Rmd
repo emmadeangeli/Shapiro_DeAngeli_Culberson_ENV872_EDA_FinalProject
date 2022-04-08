@@ -46,23 +46,14 @@ print(plot1)
 
 ```
 
+
 ```{r}
 plot2 <-
-  ggplot(GFD_renamed, aes(x = Year, y = credit.to.gdp)) +
-  geom_point() +
-  geom_smooth(method = lm, se = FALSE, col = "red") +
-  labs(x = "Year", y = "Credit to GDP (%)")
-print(plot2)
-
-```
-
-```{r}
-plot3 <-
   ggplot(GFD_renamed, aes(x = Year, y = credit.to.private)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE, col = "red") +
   labs(x = "Year", y = "Domestic Credit to Private Sector (% GDP)")
-print(plot3)
+print(plot2)
 
 ```
 
