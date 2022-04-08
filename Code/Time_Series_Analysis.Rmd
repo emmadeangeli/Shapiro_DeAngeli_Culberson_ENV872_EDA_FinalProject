@@ -9,21 +9,8 @@ output: html_document
 
 This exercise accompanies the lessons in Environmental Data Analytics on time series analysis. 
 
-## Directions
-1. Change "Student Name" on line 3 (above) with your name.
-2. Work through the steps, **creating code and output** that fulfill each instruction.
-3. Be sure to **answer the questions** in this assignment document.
-4. When you have completed the assignment, **Knit** the text and code into a single PDF file.
-5. After Knitting, submit the completed exercise (PDF file) to the dropbox in Sakai. Add your last name into the file name (e.g., "Fay_A07_TimeSeries.Rmd") prior to submission.
-
-The completed exercise is due on Monday, March 14 at 7:00 pm.
 
 ## Set up 
-1. Set up your session:
-
-* Check your working directory
-* Load the tidyverse, lubridate, zoo, and trend packages
-* Set your ggplot theme
 
 ```{r}
 #1
