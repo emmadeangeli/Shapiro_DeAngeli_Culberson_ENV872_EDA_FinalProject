@@ -42,10 +42,10 @@ summary(GEM_raw)
 ```
 
 ```{r wrangle}
-GEM_filter <- GEM_raw %>% 
+GEM_processed <- GEM_raw %>% 
   drop_na()
   
-colnames(GEM_filter) <- c("Country","Country.Code","Series","Series.Code",2008:2020)
+colnames(GEM_processed) <- c("Country","Country.Code","Series","Series.Code",2008:2020)
 
 #this stopped working well 
 # rename(GEM_filter, c('Country' = ï..Country, 
@@ -65,9 +65,11 @@ colnames(GEM_filter) <- c("Country","Country.Code","Series","Series.Code",2008:2
 
 Series.Desc <- c("Exports","GDP","Imports","Production","Stock","Reserves","Unemployment") 
 
-GEM_filter$Series.Desc <- Series.Desc
+GEM_processed$Series.Desc <- Series.Desc
 
 ```
 
-
+```{r}
+write.csv(GEM_processed,"../Data/Processed/GEM_processed.csv")
+```
 
