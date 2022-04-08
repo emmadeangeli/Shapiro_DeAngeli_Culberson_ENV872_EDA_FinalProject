@@ -35,6 +35,9 @@ theme_set(mytheme)
 ```{r explore}
 GEM_raw <- read.csv('../Data/Raw/Japan_GEM_Data.csv', stringsAsFactors = TRUE)
 
+CCDR <- read.csv('../Data/Processed/GFD_processed.csv', stringsAsFactors = TRUE)
+GFD <- read.csv('../Data/Processed/CCDR_processed.csv', stringsAsFactors = TRUE)
+
 str(GEM_raw)
 dim(GEM_raw)
 length(GEM_raw)
@@ -42,10 +45,10 @@ summary(GEM_raw)
 ```
 
 ```{r wrangle}
-GEM_processed <- GEM_raw %>% 
+GEM_wrangle <- GEM_raw %>% 
   drop_na()
   
-colnames(GEM_processed) <- c("Country","Country.Code","Series","Series.Code",2008:2020)
+colnames(GEM_wrangle) <- c("Country","Country.Code","Series","Series.Code",1:13)
 
 #this stopped working well 
 # rename(GEM_filter, c('Country' = ï..Country, 
@@ -65,7 +68,31 @@ colnames(GEM_processed) <- c("Country","Country.Code","Series","Series.Code",200
 
 Series.Desc <- c("Exports","GDP","Imports","Production","Stock","Reserves","Unemployment") 
 
-GEM_processed$Series.Desc <- Series.Desc
+GEM_wrangle$Series.Desc <- Series.Desc
+
+GEM_metadata <- select(GEM_wrangle, starts_with("Series"))
+GEM_select <- GEM_wrangle[,5:18]
+GEM_tr <- as.data.frame(t(GEM_select))
+colnames(GEM_tr) <- GEM_tr[14,]
+GEM_tr <- GEM_tr[-14,]
+Years <- seq(dmy("01-01-2008"), dmy("01-01-2020"), by = "year")
+GEM_tr$Country <- "Japan"
+GEM_tr$Year <- Years
+
+
+GEM_processed <- GEM_tr %>%
+  select(Country, Year, everything())
+
+GEM_processed$Year <- as.Date(GEM_processed$Year , format = "%m/%d/%Y")
+GEM_processed$Exports <- as.numeric(GEM_processed$Exports)
+GEM_processed$GDP <- as.numeric(GEM_processed$GDP)
+GEM_processed$Imports <- as.numeric(GEM_processed$Imports)
+GEM_processed$Production <- as.numeric(GEM_processed$Production)
+GEM_processed$Stock <- as.numeric(GEM_processed$Stock)
+GEM_processed$Reserves <- as.numeric(GEM_processed$Reserves)
+GEM_processed$Unemployment <- as.numeric(GEM_processed$Unemployment)
+
+#str(GEM_processed)
 
 ```
 
@@ -73,3 +100,23 @@ GEM_processed$Series.Desc <- Series.Desc
 write.csv(GEM_processed,"../Data/Processed/GEM_processed.csv")
 ```
 
+```{r}
+plot1 <-
+  ggplot(GEM_processed, aes(x = Year, y = Exports)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, col = "red") +
+  labs(x = "Year", y = "Exports")
+plot1
+
+```
+
+```{r}
+plot2 <-
+  ggplot(GEM_processed, aes(x = Year, y = Unemployment)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, col = "blue") +
+  labs(x = "Year", y = "Unemployment")
+plot2
+
+
+```
