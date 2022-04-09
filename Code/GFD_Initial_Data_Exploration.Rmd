@@ -17,9 +17,9 @@ library(dplyr)
 ```
 
 ```{r clean}
-GFD_Raw <- as.data.frame(read_excel("../Data/Raw/GFD raw.xlsx"))
+GFD_raw <- as.data.frame(read_excel("../Data/Raw/GFD_raw.xlsx"))
 
-GFD_renamed <- rename(GFD_Raw, assets.to.gdp = 'Central bank assets to GDP (%)',  credit.to.private = 'Domestic credit to private sector (% of GDP)')
+GFD_renamed <- rename(GFD_raw, assets.to.gdp = 'Central bank assets to GDP (%)',  credit.to.private = 'Domestic credit to private sector (% of GDP)')
 
 GFD_renamed$Year <- lubridate::ymd(GFD_renamed$Year, truncated = 2L)
 
