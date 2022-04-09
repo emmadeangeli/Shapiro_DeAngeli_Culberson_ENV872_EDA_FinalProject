@@ -23,11 +23,11 @@ GFD.df <- read.csv("../Data/Processed/GFD_processed.csv", stringsAsFactors = TRU
 # GEM.df <- read.csv("../Data/Processed/GEM_processed.csv", stringsAsFactors = TRUE)
 # CCDR.df <- read.csv("../Data/Processed/GFD_processed.csv", stringsAsFactors = TRUE)
 
-# our_data.df <- left_join(GFD.df, GEM.df, CCDR.df)
+# finance_forests.df <- left_join(GFD.df, GEM.df, CCDR.df)
 
 ```
 
 ```{r writecsv}
-write.csv(GFD_clean, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
+write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
 ```
 
