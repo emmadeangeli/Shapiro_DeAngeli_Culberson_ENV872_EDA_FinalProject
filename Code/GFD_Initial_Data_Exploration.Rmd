@@ -1,7 +1,7 @@
 ---
 title: "Global Financial Data Initial Exploration"
 author: "Emma DeAngeli"
-date: "4/4/2022"
+date: "4/9/2022"
 output: pdf_document
 ---
 
