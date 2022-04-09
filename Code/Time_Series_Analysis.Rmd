@@ -23,8 +23,13 @@ mytheme <- theme_classic(base_size = 14) +
 theme_set(mytheme)
 
 ```
+###Rationale and Research Questions (Added by Ben, not in the time series instructions)
+(Write 1-2 paragraph(s) detailing the rationale for your study, see the project instructions)
 
 ## Wrangling
+
+###Dataset Information (Added by Ben, not in the time series instructions)
+(provide information on how the data is collected, create a data table, see the project instructions)
 
 ```{r, message = FALSE}
 
@@ -39,7 +44,47 @@ GFD.data <- read.csv(file="../Data/Processed/GFD_processed.csv",
 our.df <- cbind(Forest_Share_Japan.data, GEM.data, GFD.data)
 our.df <- select(our.df, Share.of.Surface.Occupied.by.Forest, Country, Exports:credit.to.private)
 
+<<<<<<< HEAD
 our.df$Year <- lubridate::ymd(our.df$Year, truncated = 2L)
+=======
+```
+(For these next 3 sections, move the titles to match the code)
+(These are just supposed to help guide the analysis to match the project instructions)
+
+###Exploratory Analysis (Added by Ben, not in the time series instructions)
+(Initial exploration of the data, need some graphs, see the project instructions)
+
+###Analysis (Added by Ben, not in the time series instructions)
+(This is where we have to add the time series decomposition using the stuff from the time series problem set)
+
+### Summary and Conclusions (Added by Ben, not in the time series instructions)
+(Summarize major findings in a few paragraphs)
+
+
+## Wrangle
+
+3. Set your date column as a date class.
+
+4. Wrangle your dataset so that it only contains the columns Date, Daily.Max.8.hour.Ozone.Concentration, and DAILY_AQI_VALUE. 
+
+5. Notice there are a few days in each year that are missing ozone concentrations. We want to generate a daily dataset, so we will need to fill in any missing days with NA. Create a new data frame that contains a sequence of dates from 2010-01-01 to 2019-12-31 (hint: `as.data.frame(seq())`). Call this new data frame Days. Rename the column name in Days to "Date".
+
+6. Use a `left_join` to combine the data frames. Specify the correct order of data frames within this function so that the final dimensions are 3652 rows and 3 columns. Call your combined data frame GaringerOzone. 
+
+```{r}
+# 3
+GaringerOzone_before$Date <- as.Date(GaringerOzone_before$Date, format = "%m/%d/%Y")
+
+# 4
+GaringerOzone_before <- select(GaringerOzone_before, Date, Daily.Max.8.hour.Ozone.Concentration, DAILY_AQI_VALUE)
+
+# 5
+Days <- as.data.frame(seq(from = as.Date("2010-01-01"), to = as.Date("2019-12-31"), by = "day"))
+names(Days) <- c("Date")
+
+# 6
+GaringerOzone <- left_join(Days, GaringerOzone_before)
+>>>>>>> afb8899f36bf3097534650d707a62de67892bf96
 
 ```
 
