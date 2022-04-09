@@ -25,7 +25,12 @@ mytheme <- theme_classic(base_size = 14) +
 theme_set(mytheme)
 
 ```
+###Rationale and Research Questions (Added by Ben, not in the time series instructions)
+(Write 1-2 paragraph(s) detailing the rationale for your study, see the project instructions)
 
+
+###Dataset Information (Added by Ben, not in the time series instructions)
+(provide information on how the data is collected, create a data table, see the project instructions)
 
 ```{r, message = FALSE}
 
@@ -41,6 +46,18 @@ our.df <- cbind(Forest_Share_Japan.data, GEM.data, GFD.data)
 our.df <- select(our.df, Share.of.Surface.Occupied.by.Forest, Country, Exports:credit.to.private)
 
 ```
+(For these next 3 sections, move the titles to match the code)
+(These are just supposed to help guide the analysis to match the project instructions)
+
+###Exploratory Analysis (Added by Ben, not in the time series instructions)
+(Initial exploration of the data, need some graphs, see the project instructions)
+
+###Analysis (Added by Ben, not in the time series instructions)
+(This is where we have to add the time series decomposition using the stuff from the time series problem set)
+
+### Summary and Conclusions (Added by Ben, not in the time series instructions)
+(Summarize major findings in a few paragraphs)
+
 
 ## Wrangle
 
