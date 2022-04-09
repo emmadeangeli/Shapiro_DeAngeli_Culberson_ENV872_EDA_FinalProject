@@ -21,14 +21,14 @@ GFD_raw <- as.data.frame(read_excel("../Data/Raw/GFD_raw.xlsx"))
 
 GFD_spread <- pivot_wider(GFD_raw, names_from = "Series Name", values_from = "2018")
 
-GFD_renamed <- rename(GFD_spread, assets.to.gdp = 'Central bank assets to GDP (%)',  credit.to.private = 'Domestic credit to private sector (% of GDP)')
+GFD_renamed <- rename(GFD_spread, Country = 'Country Name', assets.to.gdp = 'Central bank assets to GDP (%)',  credit.to.private = 'Domestic credit to private sector (% of GDP)')
 
 cb_df <- GFD_renamed %>%
-  select(`Country Name`, `Country Code`, assets.to.gdp) %>%
+  select(Country, assets.to.gdp) %>%
   na.omit()
   
 dc_df <- GFD_renamed %>%
-  select(`Country Name`, `Country Code`, credit.to.private) %>%
+  select(Country, credit.to.private) %>%
   na.omit()
 
 GFD_clean <- left_join(cb_df, dc_df)
@@ -42,7 +42,7 @@ write.csv(GFD_clean, file = "../Data/Processed/GFD_processed.csv", row.names=FAL
 
 ```{r}
 plot1 <-
-  ggplot(GFD_clean, aes(x = `Country Name`, y = assets.to.gdp)) +
+  ggplot(GFD_clean, aes(x = Country, y = assets.to.gdp)) +
   geom_point() +
   labs()
 print(plot1)
@@ -51,7 +51,7 @@ print(plot1)
 
 ```{r}
 plot2 <-
-  ggplot(GFD_clean, aes(x = `Country Name`, y = credit.to.private)) +
+  ggplot(GFD_clean, aes(x = Country, y = credit.to.private)) +
   geom_point() +
   labs()
 print(plot2)
