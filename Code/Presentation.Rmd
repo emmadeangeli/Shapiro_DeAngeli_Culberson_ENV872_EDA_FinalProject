@@ -63,6 +63,55 @@ ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Share.of.Surface.Occupied.
   geom_smooth(method = 'lm', se = FALSE, color = "darkblue") +
   labs(x = "Ratio of Central Bank Assets to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Central Asset Percentage")
 ```
+```{r}
+#plot exports 
+
+ggplot(finance_forests.df, aes(x = Exports, y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3.5, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkred") +
+  labs(x= 'Exports Merchandise (Million US$)', y = "Forest Coverage (%)", title = "Forest Coverage to Exports")
+```
+```{r}
+#plot imports 
+
+ggplot(finance_forests.df, aes(x = Imports, y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3.5, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkorange") +
+  labs(x= 'Imports Merchandise (Million US$)', y = "Forest Coverage (%)", title = "Forest Coverage to Imports")
+```
+```{r}
+#plot reserves 
+
+ggplot(finance_forests.df, aes(x = Reserves , y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3.5, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
+  labs(x= 'Total Reserves (US$)', y = "Forest Coverage (%)", title = "Forest Coverage to Total Reserves")
+```
+```{r}
+#plot Unemployment 
+
+ggplot(finance_forests.df, aes(x = Unemployment , y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3.5, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkred") +
+  labs(x= 'Unemployment (%)', y = "Forest Coverage (%)", title = "Forest Coverage to Percent Unemployment")
+```
+
 
 ```{r linear.regression}
 forest.regression <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private)
@@ -71,11 +120,11 @@ summary(forest.regression)
 ```
 
 ```{r forest.model}
-Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
+Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
  step(Forestfinance.AIC)
  summary(Forestfinance.AIC)
 
-Forestfinance.MR <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
+Forestfinance.MR <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
 summary(Forestfinance.MR)
 
 ```
@@ -87,9 +136,10 @@ summary(Forestfinance.anova)
 
 ```{r scatterplot.2}
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest, color = Country)) + 
-  geom_point(aes(alpha = 0.5)) +
-#  ylim(0, 35) +
-  geom_smooth(method = 'lm', se = FALSE, aes(color = Country))
+  geom_point(alpha = 0.5) +
+  ylim(0, 35) +
+  geom_smooth(method = 'lm', se = FALSE, aes(color = Country)) +
+  labs(x= 'Credit to Private', y = "Forest Coverage (%)", title = "Credit to Private to Total Reserves")
 
 ```
 
