@@ -3,6 +3,8 @@ title: "Presentation"
 author: "Ben Culberson"
 date: "4/10/2022"
 output: pdf_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Set up
@@ -45,7 +47,7 @@ finance_forests.df <-left_join(finance_forests.df, GEM.df)
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest)) + 
   geom_point() +
   geom_label_repel(aes(label = Country),
-                  box.padding   = 3.75, 
+                  box.padding   = 4, 
                   point.padding = 0.5,
                   segment.color = 'grey50')+
   geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
@@ -55,7 +57,7 @@ ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occup
 ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
   geom_point() +
   geom_label_repel(aes(label = Country),
-                  box.padding   = 3, 
+                  box.padding   = 3.5, 
                   point.padding = 0.5,
                   segment.color = 'grey50')+
   geom_smooth(method = 'lm', se = FALSE, color = "darkblue") +
