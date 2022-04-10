@@ -20,15 +20,16 @@ library(dplyr)
 
 ```{r clean}
 GFD.df <- read.csv("../Data/Processed/GFD_processed.csv", stringsAsFactors = TRUE)
-# GEM.df <- read.csv("../Data/Processed/GEM_processed.csv", stringsAsFactors = TRUE)
+GEM.df <- read.csv("../Data/Processed/GEM_processed.csv", stringsAsFactors = TRUE)
 CCDR.df <- read.csv("../Data/Processed/Forest_Share_2018_processed.csv", stringsAsFactors = TRUE)
 
 finance_forests.df <- left_join(GFD.df, CCDR.df)
+finance_forests.df <-left_join(finance_forests.df, GEM.df)
 
 ```
 
 ```{r writecsv}
-# write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
+write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
 ```
 
 ## Exploration
