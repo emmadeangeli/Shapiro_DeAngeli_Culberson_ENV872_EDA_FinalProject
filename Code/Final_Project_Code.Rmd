@@ -47,7 +47,7 @@ summary(forest.regression)
 ```
 
 ```{r forest.model}
-Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
+Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
  step(Forestfinance.AIC)
  summary(Forestfinance.AIC)
 
@@ -64,8 +64,7 @@ summary(Forestfinance.anova)
 ```{r scatterplot.2}
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest, color = Country)) + 
   geom_point(aes(alpha = 0.5)) +
-#  ylim(0, 35) +
-  geom_smooth(method = 'lm', se = FALSE, aes(color = Country))
+  geom_smooth(method = 'lm', se = FALSE, aes(color = "green"))
 
 ```
 
