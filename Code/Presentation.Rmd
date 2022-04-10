@@ -1,8 +1,10 @@
 ---
-title: "Final Project Code"
-author: "Emma DeAngeli"
-date: "4/9/2022"
-output: html_document
+title: "Presentation"
+author: "Ben Culberson"
+date: "4/10/2022"
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Set up
@@ -16,6 +18,13 @@ library(zoo)
 library(trend)
 library(readxl)
 library(dplyr)
+library(ggrepel)
+
+mytheme <- theme_classic(base_size = 14) +
+  theme(axis.text = element_text(color = "black"), 
+        legend.position = "right")
+
+theme_set(mytheme)
 ```
 
 ```{r clean}
@@ -29,7 +38,7 @@ finance_forests.df <-left_join(finance_forests.df, GEM.df)
 ```
 
 ```{r writecsv}
-# write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
+#write.csv(finance_forests.df, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
 ```
 
 ## Exploration
@@ -37,7 +46,22 @@ finance_forests.df <-left_join(finance_forests.df, GEM.df)
 ```{r}
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest)) + 
   geom_point() +
-  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen")
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 4, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
+  labs(x = "Domestic Credit Provided by Private Sector (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Private Credit Percentage")
+```
+```{r}
+ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3.5, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkblue") +
+  labs(x = "Ratio of Central Bank Assets to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Central Asset Percentage")
 ```
 
 ```{r linear.regression}
@@ -46,14 +70,8 @@ summary(forest.regression)
 
 ```
 
-```{r, fig.height = 3, fig.width = 4}
-par(mfrow = c(2,2), mar=c(4,4,4,4))
-plot(forest.regression)
-par(mfrow = c(1,1))
-```
-
 ```{r forest.model}
-Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
+Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
  step(Forestfinance.AIC)
  summary(Forestfinance.AIC)
 
@@ -70,7 +88,8 @@ summary(Forestfinance.anova)
 ```{r scatterplot.2}
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest, color = Country)) + 
   geom_point(aes(alpha = 0.5)) +
-  geom_smooth(method = 'lm', se = FALSE, aes(color = "green"))
+#  ylim(0, 35) +
+  geom_smooth(method = 'lm', se = FALSE, aes(color = Country))
 
 ```
 
