@@ -102,7 +102,7 @@ GEM_processed$Unemployment <- as.numeric(as.character(GEM_processed$Unemployment
 ```
 
 ```{r}
-write.csv(GEM_processed,"../Data/Processed/GEM_processed.csv")
+write.csv(GEM_processed,"../Data/Processed/GEM_processed_NA.csv")
 write.csv(GEM_metadata,"../Data/Processed/GEM_series_metadata.csv")
 ```
 
