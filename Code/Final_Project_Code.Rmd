@@ -46,6 +46,12 @@ summary(forest.regression)
 
 ```
 
+```{r, fig.height = 3, fig.width = 4}
+par(mfrow = c(2,2), mar=c(4,4,4,4))
+plot(forest.regression)
+par(mfrow = c(1,1))
+```
+
 ```{r forest.model}
 Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
  step(Forestfinance.AIC)
