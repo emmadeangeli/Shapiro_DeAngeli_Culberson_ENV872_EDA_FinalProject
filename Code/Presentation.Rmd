@@ -1,0 +1,71 @@
+---
+title: "Presentation"
+author: "Ben Culberson"
+date: "4/10/2022"
+output: pdf_document
+---
+
+## Set up
+
+```{r Libraries }
+library(tidyverse)
+library(lubridate)
+library(agricolae)
+library(ggplot2)
+library(zoo)
+library(trend)
+library(readxl)
+library(dplyr)
+```
+
+```{r clean}
+GFD.df <- read.csv("../Data/Processed/GFD_processed.csv", stringsAsFactors = TRUE)
+# GEM.df <- read.csv("../Data/Processed/GEM_processed.csv", stringsAsFactors = TRUE)
+CCDR.df <- read.csv("../Data/Processed/Forest_Share_2018_processed.csv", stringsAsFactors = TRUE)
+
+finance_forests.df <- left_join(GFD.df, CCDR.df)
+
+```
+
+```{r writecsv}
+# write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
+```
+
+## Exploration
+
+```{r}
+ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest)) + 
+  geom_point() +
+  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen")
+```
+
+```{r linear.regression}
+forest.regression <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private)
+summary(forest.regression)
+
+```
+
+```{r forest.model}
+Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
+ step(Forestfinance.AIC)
+ summary(Forestfinance.AIC)
+
+Forestfinance.MR <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
+summary(Forestfinance.MR)
+
+```
+
+```{r}
+Forestfinance.anova <- aov(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private)
+summary(Forestfinance.anova)
+```
+
+```{r scatterplot.2}
+ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest, color = Country)) + 
+  geom_point(aes(alpha = 0.5)) +
+#  ylim(0, 35) +
+  geom_smooth(method = 'lm', se = FALSE, aes(color = Country))
+
+```
+
+NOTE FOR ALL: No idea what Tukey test would look like here
