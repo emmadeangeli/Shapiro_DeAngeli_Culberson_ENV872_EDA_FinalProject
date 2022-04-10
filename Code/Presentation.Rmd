@@ -16,6 +16,13 @@ library(zoo)
 library(trend)
 library(readxl)
 library(dplyr)
+library(ggrepel)
+
+mytheme <- theme_classic(base_size = 14) +
+  theme(axis.text = element_text(color = "black"), 
+        legend.position = "right")
+
+theme_set(mytheme)
 ```
 
 ```{r clean}
@@ -29,7 +36,7 @@ finance_forests.df <-left_join(finance_forests.df, GEM.df)
 ```
 
 ```{r writecsv}
-write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
+#write.csv(finance_forests.df, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
 ```
 
 ## Exploration
@@ -37,7 +44,22 @@ write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=F
 ```{r}
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest)) + 
   geom_point() +
-  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen")
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3.75, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
+  labs(x = "Domestic Credit Provided by Private Sector (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Private Credit Percentage")
+```
+```{r}
+ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkblue") +
+  labs(x = "Ratio of Central Bank Assets to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Central Asset Percentage")
 ```
 
 ```{r linear.regression}
