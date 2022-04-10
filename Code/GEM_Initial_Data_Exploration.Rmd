@@ -33,10 +33,10 @@ theme_set(mytheme)
 
 
 ```{r explore}
-GEM_raw <- read.csv('../Data/Raw/Japan_GEM_Data.csv', stringsAsFactors = TRUE)
+GEM_raw <- read.csv('../Data/Raw/GEM_2018.csv', stringsAsFactors = TRUE)
 
-CCDR <- read.csv('../Data/Processed/GFD_processed.csv', stringsAsFactors = TRUE)
-GFD <- read.csv('../Data/Processed/CCDR_processed.csv', stringsAsFactors = TRUE)
+GFD <- read.csv('../Data/Processed/GFD_processed.csv', stringsAsFactors = TRUE)
+Forest <- read.csv('../Data/Processed/Forest_Share_2018_processed.csv', stringsAsFactors = TRUE)
 
 str(GEM_raw)
 dim(GEM_raw)
@@ -45,85 +45,82 @@ summary(GEM_raw)
 ```
 
 ```{r wrangle}
-GEM_wrangle <- GEM_raw %>% 
-  drop_na()
+GEM_wrangle <- GEM_raw[1:35,]
   
-colnames(GEM_wrangle) <- c("Country","Country.Code","Series","Series.Code",1:13)
+colnames(GEM_wrangle) <- c("Country","Country.Code","Series","Series.Code","2018")
 
-#this stopped working well 
-# rename(GEM_filter, c('Country' = ï..Country, 
-#                      '2008' = X2008..2008.,
-#                      '2009' = X2009..2009., 
-#                      '2010' = X2010..2010.,
-#                      '2011' = X2011..2011.,
-#                      '2012' = X2012..2012.,
-#                      '2013' = X2013..2013.,
-#                      '2014' = X2014..2014., 
-#                      '2015' = X2015..2015., 
-#                      '2016' = X2016..2016., 
-#                      '2017' = X2017..2017.,
-#                      '2018' = X2018..2018.,
-#                      '2019' = X2019..2019.,
-#                      '2020' = X2020..2020.))
+GEM_spread <- pivot_wider(GEM_wrangle, names_from = "Series", values_from = "2018")
 
-Series.Desc <- c("Exports","GDP","Imports","Production","Stock","Reserves","Unemployment") 
+GEM_renamed <- rename(GEM_spread, 
+                      Exports = "Exports Merchandise, Customs, constant US$, millions, not seas. adj.", 
+                      GDP = "GDP,constant 2010 LCU,millions,seas. adj.,",
+                      Imports = "Imports Merchandise, Customs, constant US$, millions, not seas. adj.",
+                      Production = "Industrial Production, constant US$, seas. adj.,,",
+                      Stock= "Stock Markets, US$,,,", 
+                      Reserves ="Total Reserves,,,,", 
+                      Unemployment = "Unemployment rate,Percent,,,")
 
-GEM_wrangle$Series.Desc <- Series.Desc
+ex_df <- GEM_renamed %>%
+  select(Country, Exports) %>%
+  na.omit()
+gdp_df <- GEM_renamed %>%
+  select(Country, GDP) %>%
+  na.omit()
+imp_df <- GEM_renamed %>%
+  select(Country, Imports) %>%
+  na.omit()
+pro_df <- GEM_renamed %>%
+  select(Country, Production) %>%
+  na.omit()
+st_df <- GEM_renamed %>%
+  select(Country, Stock) %>%
+  na.omit()
+re_df <- GEM_renamed %>%
+  select(Country, Reserves) %>%
+  na.omit()
+un_df <- GEM_renamed %>%
+  select(Country, Unemployment) %>%
+  na.omit()
 
-GEM_metadata <- select(GEM_wrangle, starts_with("Series"))
-GEM_select <- GEM_wrangle[,5:18]
-GEM_tr <- as.data.frame(t(GEM_select))
-colnames(GEM_tr) <- GEM_tr[14,]
-GEM_tr <- GEM_tr[-14,]
-Years <- seq(dmy("01-01-2008"), dmy("01-01-2020"), by = "year")
-GEM_tr$Country <- "Japan"
-GEM_tr$Year <- Years
+#put all data frames into list
+df_list <- list(ex_df,gdp_df,pro_df,imp_df,st_df,re_df,un_df)
+
+#merge all data frames in list
+GEM_processed <- df_list %>% reduce(full_join, by='Country')
+
+GEM_metadata <- colnames(GEM_raw)
 
 
-GEM_processed <- GEM_tr %>%
-  select(Country, Year, everything())
-
-GEM_processed$Year <- as.Date(GEM_processed$Year , format = "%m/%d/%Y")
-GEM_processed$Exports <- as.numeric(GEM_processed$Exports)
-GEM_processed$GDP <- as.numeric(GEM_processed$GDP)
-GEM_processed$Imports <- as.numeric(GEM_processed$Imports)
-GEM_processed$Production <- as.numeric(GEM_processed$Production)
-GEM_processed$Stock <- as.numeric(GEM_processed$Stock)
-GEM_processed$Reserves <- as.numeric(GEM_processed$Reserves)
-GEM_processed$Unemployment <- as.numeric(GEM_processed$Unemployment)
-
-#2009-2018
-GEM_processed <- GEM_processed[c(2:11),]
-
-#str(GEM_processed)
+GEM_processed$Exports <- as.numeric(as.character(GEM_processed$Exports))
+GEM_processed$GDP <- as.numeric(as.character(GEM_processed$GDP))
+GEM_processed$Imports <- as.numeric(as.character(GEM_processed$Imports))
+GEM_processed$Production <- as.numeric(as.character(GEM_processed$Production))
+GEM_processed$Stock <- as.numeric(as.character(GEM_processed$Stock))
+GEM_processed$Reserves <- as.numeric(as.character(GEM_processed$Reserves))
+GEM_processed$Unemployment <- as.numeric(as.character(GEM_processed$Unemployment))
 
 ```
 
 ```{r}
 write.csv(GEM_processed,"../Data/Processed/GEM_processed.csv")
+write.csv(GEM_metadata,"../Data/Processed/GEM_series_metadata.csv")
 ```
 
 ```{r}
-plot1 <-
-  ggplot(GEM_processed, aes(x = Year, y = Exports)) +
-  geom_point() +
-  geom_smooth(method = lm, se = FALSE, col = "red") +
-  labs(x = "Year", y = "Exports")
-plot1
+# plot1 <-
+#   ggplot(GEM_processed, aes(x = Year, y = Exports)) +
+#   geom_point() +
+#   geom_smooth(method = lm, se = FALSE, col = "red") +
+#   labs(x = "Year", y = "Exports")
+# plot1
 
 ```
 
 ```{r}
-plot2 <-
-  ggplot(GEM_processed, aes(x = Year, y = Unemployment)) +
-  geom_point() +
-  geom_smooth(method = lm, se = FALSE, col = "blue") +
-  labs(x = "Year", y = "Unemployment")
-plot2
-```
-
-
-```{r}
-#countries 
-#japan, phillipines, sri lanka, 
+# plot2 <-
+#   ggplot(GEM_processed, aes(x = Year, y = Unemployment)) +
+#   geom_point() +
+#   geom_smooth(method = lm, se = FALSE, col = "blue") +
+#   labs(x = "Year", y = "Unemployment")
+# plot2
 ```
