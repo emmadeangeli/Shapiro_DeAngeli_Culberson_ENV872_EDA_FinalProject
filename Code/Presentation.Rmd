@@ -47,21 +47,21 @@ finance_forests.df <-left_join(finance_forests.df, GEM.df)
 ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest)) + 
   geom_point() +
   geom_label_repel(aes(label = Country),
-                  box.padding   = 4, 
+                  box.padding   = 5, 
                   point.padding = 0.5,
                   segment.color = 'grey50')+
   geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
-  labs(x = "Domestic Credit Provided by Private Sector (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Private Credit Percentage")
+  labs(x = "Ratio of Domestic Credit Provided by Private Sector to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage and Private Credit")
 ```
 ```{r}
 ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
   geom_point() +
   geom_label_repel(aes(label = Country),
-                  box.padding   = 3.5, 
+                  box.padding   = 4.5, 
                   point.padding = 0.5,
                   segment.color = 'grey50')+
   geom_smooth(method = 'lm', se = FALSE, color = "darkblue") +
-  labs(x = "Ratio of Central Bank Assets to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage to Central Asset Percentage")
+  labs(x = "Ratio of Central Bank Assets to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage and Central Bank Assets")
 ```
 
 ```{r linear.regression}
