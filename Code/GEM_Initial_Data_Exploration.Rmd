@@ -85,21 +85,22 @@ df_list2 <- list(gdp_df,re_df)
 #merge all data frames in list
 GEM_processed <- df_list %>% reduce(full_join, by='Country') %>% na.omit()
 GEM_processed2 <- df_list2 %>% reduce(full_join, by = 'Country') %>% na.omit()
+GEM_processed3 <- re_df
 
 
 GEM_metadata <- colnames(GEM_raw)
 
 
-GEM_processed$Exports <- as.numeric(as.character(GEM_processed$Exports))
-GEM_processed$GDP <- as.numeric(as.character(GEM_processed$GDP))
-GEM_processed$Imports <- as.numeric(as.character(GEM_processed$Imports))
-GEM_processed$Reserves <- as.numeric(as.character(GEM_processed$Reserves))
-GEM_processed$Unemployment <- as.numeric(as.character(GEM_processed$Unemployment))
+#GEM_processed$Exports <- as.numeric(as.character(GEM_processed$Exports))
+#GEM_processed$GDP <- as.numeric(as.character(GEM_processed$GDP))
+#GEM_processed$Imports <- as.numeric(as.character(GEM_processed$Imports))
+GEM_processed3$Reserves <- as.numeric(as.character(GEM_processed3$Reserves))
+#GEM_processed$Unemployment <- as.numeric(as.character(GEM_processed$Unemployment))
 
 ```
 
 ```{r}
-write.csv(GEM_processed,"../Data/Processed/GEM_processed.csv")
+write.csv(GEM_processed3,"../Data/Processed/GEM_processed.csv")
 #write.csv(GEM_metadata,"../Data/Processed/GEM_series_metadata.csv")
 ```
 
