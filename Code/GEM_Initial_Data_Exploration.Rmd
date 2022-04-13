@@ -5,6 +5,8 @@ date: "4/4/2022"
 output: pdf_document
 ---
 
+#Pull again with all countries, not just 5 
+
 ```{r Libraries }
 library(tidyverse, quietly = TRUE)
 library(lubridate)
@@ -33,7 +35,7 @@ theme_set(mytheme)
 
 
 ```{r explore}
-GEM_raw <- read.csv('../Data/Raw/GEM_2018.csv', stringsAsFactors = TRUE)
+GEM_raw <- read.csv('../Data/Raw/All_2018_GEM.csv', stringsAsFactors = TRUE)
 
 GFD <- read.csv('../Data/Processed/GFD_processed.csv', stringsAsFactors = TRUE)
 Forest <- read.csv('../Data/Processed/Forest_Share_2018_processed.csv', stringsAsFactors = TRUE)
@@ -45,7 +47,10 @@ summary(GEM_raw)
 ```
 
 ```{r wrangle}
-GEM_wrangle <- GEM_raw[1:35,]
+
+
+
+GEM_wrangle <- GEM_raw[1:1100,]
   
 colnames(GEM_wrangle) <- c("Country","Country.Code","Series","Series.Code","2018")
 
@@ -55,10 +60,10 @@ GEM_renamed <- rename(GEM_spread,
                       Exports = "Exports Merchandise, Customs, constant US$, millions, not seas. adj.", 
                       GDP = "GDP,constant 2010 LCU,millions,seas. adj.,",
                       Imports = "Imports Merchandise, Customs, constant US$, millions, not seas. adj.",
-                      Production = "Industrial Production, constant US$, seas. adj.,,",
-                      Stock= "Stock Markets, US$,,,", 
                       Reserves ="Total Reserves,,,,", 
                       Unemployment = "Unemployment rate,Percent,,,")
+
+GEM_renamed <- na_if(GEM_renamed, "..")
 
 ex_df <- GEM_renamed %>%
   select(Country, Exports) %>%
@@ -69,12 +74,6 @@ gdp_df <- GEM_renamed %>%
 imp_df <- GEM_renamed %>%
   select(Country, Imports) %>%
   na.omit()
-pro_df <- GEM_renamed %>%
-  select(Country, Production) %>%
-  na.omit()
-st_df <- GEM_renamed %>%
-  select(Country, Stock) %>%
-  na.omit()
 re_df <- GEM_renamed %>%
   select(Country, Reserves) %>%
   na.omit()
@@ -83,10 +82,11 @@ un_df <- GEM_renamed %>%
   na.omit()
 
 #put all data frames into list
-df_list <- list(ex_df,gdp_df,pro_df,imp_df,st_df,re_df,un_df)
+df_list <- list(ex_df,gdp_df,imp_df,re_df,un_df)
 
 #merge all data frames in list
-GEM_processed <- df_list %>% reduce(full_join, by='Country')
+GEM_processed <- df_list %>% reduce(full_join, by='Country') %>% na.omit(GEM_processed$Reserves)
+
 
 GEM_metadata <- colnames(GEM_raw)
 
@@ -94,16 +94,14 @@ GEM_metadata <- colnames(GEM_raw)
 GEM_processed$Exports <- as.numeric(as.character(GEM_processed$Exports))
 GEM_processed$GDP <- as.numeric(as.character(GEM_processed$GDP))
 GEM_processed$Imports <- as.numeric(as.character(GEM_processed$Imports))
-GEM_processed$Production <- as.numeric(as.character(GEM_processed$Production))
-GEM_processed$Stock <- as.numeric(as.character(GEM_processed$Stock))
 GEM_processed$Reserves <- as.numeric(as.character(GEM_processed$Reserves))
 GEM_processed$Unemployment <- as.numeric(as.character(GEM_processed$Unemployment))
 
 ```
 
 ```{r}
-write.csv(GEM_processed,"../Data/Processed/GEM_processed_NA.csv")
-write.csv(GEM_metadata,"../Data/Processed/GEM_series_metadata.csv")
+write.csv(GEM_processed,"../Data/Processed/GEM_processed.csv")
+#write.csv(GEM_metadata,"../Data/Processed/GEM_series_metadata.csv")
 ```
 
 ```{r}
