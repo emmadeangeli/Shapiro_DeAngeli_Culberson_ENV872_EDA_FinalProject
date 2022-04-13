@@ -93,11 +93,11 @@ ggplot(finance_forests.df, aes(x = Imports, y = Share.of.Surface.Occupied.by.For
 ggplot(finance_forests.df, aes(x = Reserves , y = Share.of.Surface.Occupied.by.Forest, label=Country)) + 
   geom_point() +
   geom_label_repel(aes(label = Country),
-                  box.padding   = 3.5, 
+                  box.padding   = 3, 
                   point.padding = 0.5,
                   segment.color = 'grey50')+
-  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
-  labs(x= 'Total Reserves (US$)', y = "Forest Coverage (%)", title = "Forest Coverage to Total Reserves")
+  geom_smooth(method = 'lm', se = FALSE, color = "red") +
+  labs(x= 'Total Reserves (Million US$)', y = "Forest Coverage (%)", title = "Forest Coverage and Total Reserves")
 ```
 ```{r}
 #plot Unemployment 
