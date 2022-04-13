@@ -57,13 +57,13 @@ Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.
  step(Forestfinance.AIC)
  summary(Forestfinance.AIC)
 
-Forestfinance.MR <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp)
+Forestfinance.MR <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
 summary(Forestfinance.MR)
 
 ```
 
 ```{r}
-Forestfinance.anova <- aov(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private)
+Forestfinance.anova <- aov(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
 summary(Forestfinance.anova)
 ```
 

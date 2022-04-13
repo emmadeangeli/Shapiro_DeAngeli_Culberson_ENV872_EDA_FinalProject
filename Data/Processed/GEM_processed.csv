@@ -1,6 +1,141 @@
-,Country,Exports,GDP,Production,Imports,Stock,Reserves,Unemployment
-1,Japan,842886.9456,532545500,1.68656E+12,800689.8717,172.8227382,1240519.081,2.441199272
-2,India,987253.758,137874250,6.97551E+11,837462,137.8297931,395591,5.33
-3,Madagascar,83645.253,1928462,37495027647,73847,92.462846,1739.58829,1.92
-4,Philippines,84635.11142,18251853,1.16114E+11,125368.7931,222.4557927,79193.37,5.3
-5,Sri Lanka,53647.587,9664228.298,19850399521,174829,124.9244799,6919.22,4.4
+"","Country","Reserves"
+"1","Advanced Economies",4916510.86336849
+"2","Albania",3893.93
+"3","Angola",15410.40536547
+"4","Antigua and Barbuda",328.65684450255
+"5","Armenia",2259.3
+"6","Australia",51170.8222047723
+"7","Austria",12184.0546095623
+"8","Bangladesh",32016.252
+"9","Belarus",5391.30589502877
+"10","Belgium",17872.3642528311
+"11","Belize",294.46843505729
+"12","Bhutan",987.24703558398
+"13","Bolivia",8946.4
+"14","Bosnia and Herzegovina",6736.59923274363
+"15","Botswana",6656.91363784624
+"16","Brazil",374715
+"17","Bulgaria",28727.23
+"18","Cambodia",10143.74
+"19","Canada",83925.5692482159
+"20","Cape Verde",606.43060029509
+"21","Chile",58240.0506512301
+"22","China",3094003.11662893
+"23","Colombia",48401.5
+"24","Commodity-exporting EMDE",2613903.92095021
+"25","Commodity-importing EMDE",4575102.1884047
+"26","Commodity-importing EMDE excluding China",1487201.03104257
+"27","Congo Dem. Rep.",665.27209499291
+"28","Costa Rica",7500.9
+"29","Croatia",19523.7044217854
+"30","Cyprus",376.66778374897
+"31","Czech Republic",142512.29
+"32","Denmark",68302.5470558503
+"33","Developing Countries",6146027.81739052
+"34","Djibouti",454.1939097186
+"35","Dominica",191.32322830539
+"36","Dominican Republic",7627.6
+"37","East Asia & Pacific developing",3680568.75769594
+"38","Ecuador",2676.5
+"39","Egypt Arab Rep.",42555
+"40","El Salvador",3568.7
+"41","EMDE East Asia and Pacific",3684019.77877768
+"42","EMDE Europe and Central Asia",891068.550337021
+"43","EMDE Latin America and the Caribbean",809110.159769536
+"44","EMDE South Asia",456604.944440859
+"45","Emerging Market and Developing Economies",7188449.47671408
+"46","Equatorial Guinea",48.92981361216
+"47","Estonia",750.9348321509
+"48","Europe and Central Asia developing",714460.336001233
+"49","Finland",8360.77834639762
+"50","France",70844.4341022751
+"51","Gambia The",191.7732609803
+"52","Georgia",3288.83
+"53","Germany",64243.4946718625
+"54","Ghana",5872.7269224596
+"55","Greece",3089.35303180254
+"56","Grenada",233.81743280738
+"57","Guyana",518.50936945431
+"58","High Income Countries",5959993.69421739
+"59","Hong Kong China",424670
+"60","Hungary",31360
+"61","Iceland",6242.48313928617
+"62","India",395591
+"63","Indonesia",120654.27
+"64","Ireland",4986.97187758473
+"65","Israel",115265.900520851
+"66","Italy",55411.8928044241
+"67","Jamaica",3005.41
+"68","Japan",1240519.08087596
+"69","Jordan",22797.0415590514
+"70","Kazakhstan",30927
+"71","Kenya",11654
+"72","Korea Rep.",403694.3
+"73","Kyrgyz Republic",2155.46
+"74","Latin America & Caribbean developing",721148.994376185
+"75","Lesotho",728.52764997949
+"76","Lithuania",5774.6
+"77","Lower Middle Income Countries",941900.636357489
+"78","Luxembourg",850.23291970218
+"79","Macedonia FYR",53.00488768536
+"80","Madagascar",1739.58829028962
+"81","Malaysia",101443.9
+"82","Maldives",722.0686987769
+"83","Malta",1021.02929659399
+"84","Mauritius",6249.9
+"85","Mexico",174793
+"86","Middle Income Countries",6096673.68271199
+"87","Moldova",2995.18
+"88","Mongolia",3549.1
+"89","Morocco",24515.8461211902
+"90","Namibia",2149.91690824883
+"91","Netherlands",14197.1557138951
+"92","New Zealand",17655
+"93","Nicaragua",2261.1
+"94","Norway",63188.9628187149
+"95","Pakistan",11319.76
+"96","Panama",2121.30371810741
+"97","Paraguay",6749.6
+"98","Peru",60288
+"99","Philippines",79193.37
+"100","Poland",116964.6
+"101","Portugal",9781.6917052984
+"102","Qatar",128235.175276813
+"103","Romania",9005.99230858874
+"104","Russian Federation",468495
+"105","Rwanda",909.19585816221
+"106","Samoa",169.94455000438
+"107","San Marino",338.95747690709
+"108","Sao Tome and Principe",43.68354511754
+"109","Saudi Arabia",496645.011218066
+"110","Seychelles",549.52183172802
+"111","Sierra Leone",502.55729086255
+"112","Singapore",389214.5
+"113","Slovak Republic",5198.95470334241
+"114","Slovenia",928.70994700688
+"115","South Africa",51641
+"116","South Asia developing",456604.944440859
+"117","Spain",59498.929995585
+"118","Sri Lanka",6919.22
+"119","St. Kitts and Nevis",363.21929855427
+"120","St. Lucia",285.82136874752
+"121","St. Vincent and the Grenadines",169.56703893521
+"122","Swaziland",440.68590301385
+"123","Sweden",55582.1455871672
+"124","Switzerland",745802.965118021
+"125","Thailand",205641.1
+"126","Timor-Leste",673.90356468116
+"127","Tonga",227.18918400305
+"128","Tunisia",5238.75035500822
+"129","Turkey",93027
+"130","Uganda",3358.51464990299
+"131","Ukraine",20820.43
+"132","United Kingdom",160448.323804717
+"133","United States",127977.846681682
+"134","Upper Middle Income Countries",5128863.67899778
+"135","Uruguay",15557
+"136","Uzbekistan",27081.41
+"137","Vanuatu",420.59237017489
+"138","Vietnam",55452.6225825609
+"139","World",12098115.6919543
+"140","Zambia",1544.2
