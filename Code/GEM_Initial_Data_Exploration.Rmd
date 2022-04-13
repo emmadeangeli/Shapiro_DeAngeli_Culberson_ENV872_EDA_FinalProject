@@ -35,7 +35,7 @@ theme_set(mytheme)
 
 
 ```{r explore}
-GEM_raw <- read.csv('../Data/Raw/All_2018_GEM.csv', stringsAsFactors = TRUE)
+GEM_raw <- read.csv('../Data/Raw/All_2018_GEM.csv')
 
 GFD <- read.csv('../Data/Processed/GFD_processed.csv', stringsAsFactors = TRUE)
 Forest <- read.csv('../Data/Processed/Forest_Share_2018_processed.csv', stringsAsFactors = TRUE)
@@ -66,26 +66,21 @@ GEM_renamed <- rename(GEM_spread,
 GEM_renamed <- na_if(GEM_renamed, "..")
 
 ex_df <- GEM_renamed %>%
-  select(Country, Exports) %>%
-  na.omit()
+  select(Country, Exports) 
 gdp_df <- GEM_renamed %>%
-  select(Country, GDP) %>%
-  na.omit()
+  select(Country, GDP) 
 imp_df <- GEM_renamed %>%
-  select(Country, Imports) %>%
-  na.omit()
+   select(Country, Imports) 
 re_df <- GEM_renamed %>%
-  select(Country, Reserves) %>%
-  na.omit()
+  select(Country, Reserves) 
 un_df <- GEM_renamed %>%
-  select(Country, Unemployment) %>%
-  na.omit()
+  select(Country, Unemployment) 
 
 #put all data frames into list
 df_list <- list(ex_df,gdp_df,imp_df,re_df,un_df)
 
 #merge all data frames in list
-GEM_processed <- df_list %>% reduce(full_join, by='Country') %>% na.omit(GEM_processed$Reserves)
+GEM_processed <- df_list %>% reduce(full_join, by='Country') %>% na.omit()
 
 
 GEM_metadata <- colnames(GEM_raw)
