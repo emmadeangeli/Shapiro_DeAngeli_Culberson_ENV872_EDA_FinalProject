@@ -72,15 +72,19 @@ gdp_df <- GEM_renamed %>%
 imp_df <- GEM_renamed %>%
    select(Country, Imports) 
 re_df <- GEM_renamed %>%
-  select(Country, Reserves) 
+  select(Country, Reserves) %>%
+  na.omit()
 un_df <- GEM_renamed %>%
   select(Country, Unemployment) 
 
 #put all data frames into list
 df_list <- list(ex_df,gdp_df,imp_df,re_df,un_df)
 
+df_list2 <- list(gdp_df,re_df)
+
 #merge all data frames in list
 GEM_processed <- df_list %>% reduce(full_join, by='Country') %>% na.omit()
+GEM_processed2 <- df_list2 %>% reduce(full_join, by = 'Country') %>% na.omit()
 
 
 GEM_metadata <- colnames(GEM_raw)
