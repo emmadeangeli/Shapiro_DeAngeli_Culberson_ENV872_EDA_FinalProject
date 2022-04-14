@@ -17,7 +17,7 @@ library(cowplot)
 
 ```{r}
 Share_of_forest_2018<-read.csv(
-  "../Data/Raw/Share_of_forest_2018.csv",
+  "../Data/Raw/CCDR_All_2018_Forest.csv",
                              stringsAsFactors = TRUE)
 colnames(Share_of_forest_2018)
 
@@ -33,7 +33,7 @@ theme_set(mytheme)
 ```
 
 ```{r writecsv}
- write.csv(Share_of_forest_2018, file = "../Data/Processed/Forest_Share_2018_processed.csv", row.names=FALSE)
+ write.csv(Share_of_forest_2018, file = "../Data/Processed/All_Countries_Forest_Share_2018_processed.csv", row.names=FALSE)
 
 ```
 
