@@ -32,11 +32,12 @@ dc_df <- GFD_renamed %>%
   na.omit()
 
 GFD_clean <- left_join(cb_df, dc_df)
+GFD_cleaner <- na.omit(GFD_clean)
 
 ```
 
 ```{r writecsv}
-write.csv(GFD_clean, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
+write.csv(GFD_cleaner, file = "../Data/Processed/GFD_processed.csv", row.names=FALSE)
 ```
 
 
