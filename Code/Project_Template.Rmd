@@ -5,9 +5,9 @@ output:
     fig_caption: yes
     number_sections: yes
 geometry: margin=2.54cm
-title: "Insert title of project here"
-subtitle: "Web address for GitHub repository"
-author: "Name"
+title: "Relationship Between Financial Data and Forest Coverage in 2018"
+subtitle: "https://github.com/emmadeangeli/Shapiro_DeAngeli_Culberson_ENV872_EDA_FinalProject.git"
+author: "Ben Culberson, Emma DeAngeli, and Shana Shapiro"
 fontsize: 12pt
 mainfont: Times New Roman
 

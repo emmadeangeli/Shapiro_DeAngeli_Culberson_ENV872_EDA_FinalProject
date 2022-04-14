@@ -1,13 +1,31 @@
 ---
-title: "Final Project Code"
-author: "Emma DeAngeli"
-date: "4/9/2022"
-output: html_document
+output: 
+  pdf_document:
+    keep_tex: yes
+    fig_caption: yes
+    number_sections: yes
+geometry: margin=2.54cm
+title: "Relationship Between Financial Data and Forest Coverage in 2018"
+subtitle: "https://github.com/emmadeangeli/Shapiro_DeAngeli_Culberson_ENV872_EDA_FinalProject.git"
+author: "Ben Culberson, Emma DeAngeli, and Shana Shapiro"
+fontsize: 12pt
+mainfont: Times New Roman
+
 ---
 
-## Set up
+\newpage
+\tableofcontents 
+\newpage
+\listoftables 
+\newpage
+\listoffigures 
+\newpage
 
-```{r Libraries }
+```{r setup, include=FALSE}
+# Set your working directory
+getwd()
+
+# Load your packages
 library(tidyverse)
 library(lubridate)
 library(agricolae)
@@ -16,9 +34,17 @@ library(zoo)
 library(trend)
 library(readxl)
 library(dplyr)
+
+# Set your ggplot theme
+mytheme <- theme_classic(base_size = 14) +
+  theme(axis.text = element_text(color = "black"), 
+        legend.position = "right")
+
+theme_set(mytheme)
+
 ```
 
-```{r clean}
+```{r load.and.clean, include = FALSE}
 GFD.df <- read.csv("../Data/Processed/GFD_processed.csv", stringsAsFactors = TRUE)
 GEM.df <- read.csv("../Data/Processed/GEM_processed.csv", stringsAsFactors = TRUE)
 CCDR.df <- read.csv("../Data/Processed/All_Countries_Forest_Share_2018_processed.csv", stringsAsFactors = TRUE)
@@ -28,19 +54,35 @@ finance_forests.df <- left_join(finance_forests.df, CCDR.df)
 finance_forests.df <- select(finance_forests.df, Country:credit.to.private, Reserves, Forest_Share_of_Surface)
 finance_forests.df <- na.omit(finance_forests.df)
 
+#write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
 ```
 
-```{r writecsv}
-write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
-```
+# Rationale and Research Questions
 
-## Exploration
+We were initially interested in whether climate financing correlated to environmental health in various countries. However, we could not find enough data to lead to a robust analysis. Instead, we are looking into whether different financial indicators (in as many countries as we could find) lead specifically to forest coverage. In our project, we are using forest coverage as a proxy for environmental health. Developed countries may have the luxury of being able to preserve their forests. We were particularly interested in seeing if other financial indicators related to forest coverage. Our main research question was "do financial indicators correlate to forest coverage for different countries in 2018?" Therefore, our hypotheses are the following:
 
-```{r}
-ggplot(finance_forests.df, aes(x = credit.to.private, y = Forest_Share_of_Surface)) + 
-  geom_point() +
-  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen")
-```
+$$H_0$$: There are no financial indicators or combination of financial indicators that correlate to forest coverage.
+$$H_a$$: There is at least one financial indicator or combination of financial indicators that correlates to forest coverage.
+
+
+\newpage
+
+# Dataset Information
+
+We pulled our data from three databases on the World Bank website: Global Financial Development, Global Economic Monitor, and Country Climate and Development Report. The first two have variables related to financial and economic data while the third has variables related to climate and development. After initial exploration into the most climate-vulnerable countries, we selected four variables to analyze:
+
+---
+ - Central bank assets to GDP (%)
+ - Domestic credit to private sector (% of GDP)
+ - Domestic Reserves (Million US$)
+ - **Dependent variable:** Share of surface occupied by forest (%)
+ 
+---
+
+
+\newpage
+
+# Exploratory Analysis 
 
 ## Individual MVRs with Each Financial Variable
 
@@ -62,9 +104,7 @@ summary(forest.regression3)
 
 ```
 
-> These are some really awful p-values-- truly
-
-## Residuals and errors
+## Residuals and Errors
 
 ```{r}
 par(mfrow = c(2,2), mar=c(4,4,4,4))
@@ -84,7 +124,7 @@ plot(forest.regression3)
 par(mfrow = c(1,1))
 ```
 
-> Very bad looking plots here too :)
+## Selecting a Linear Model
 
 ```{r forest.model}
 Forestfinance.AIC <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ credit.to.private + assets.to.gdp + Reserves)
@@ -92,7 +132,6 @@ Forestfinance.AIC <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ cre
  summary(Forestfinance.AIC)
  
 # the best result is to eliminate credit.to.private and Reserves, so "forest.regression2" from earlier is the best we'll get
- 
 
 Forestfinance.MR <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ assets.to.gdp)
 summary(Forestfinance.MR)
@@ -104,11 +143,24 @@ Forestfinance.anova <- aov(data = finance_forests.df, Forest_Share_of_Surface ~ 
 summary(Forestfinance.anova)
 ```
 
-```{r scatterplot.2}
-ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Forest_Share_of_Surface)) + 
-  geom_point(aes(alpha = 0.5)) +
-  geom_smooth(method = 'lm', se = FALSE, aes(color = "green"))
+\newpage
 
-```
+# Analysis
 
-NOTE FOR ALL: No idea what Tukey test would look like here
+
+
+## Question: Do financial indicators correlate to forest coverage for different countries in 2018?
+
+
+
+
+
+\newpage
+
+# Summary and Conclusions
+
+
+
+## Exploration
+
+
