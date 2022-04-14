@@ -21,54 +21,91 @@ library(dplyr)
 ```{r clean}
 GFD.df <- read.csv("../Data/Processed/GFD_processed.csv", stringsAsFactors = TRUE)
 GEM.df <- read.csv("../Data/Processed/GEM_processed.csv", stringsAsFactors = TRUE)
-CCDR.df <- read.csv("../Data/Processed/Forest_Share_2018_processed.csv", stringsAsFactors = TRUE)
+CCDR.df <- read.csv("../Data/Processed/All_Countries_Forest_Share_2018_processed.csv", stringsAsFactors = TRUE)
 
-finance_forests.df <- left_join(GFD.df, CCDR.df)
-finance_forests.df <-left_join(finance_forests.df, GEM.df)
+finance_forests.df <- left_join(GFD.df, GEM.df)
+finance_forests.df <- left_join(finance_forests.df, CCDR.df)
+finance_forests.df <- select(finance_forests.df, Country:credit.to.private, Reserves, Forest_Share_of_Surface)
+finance_forests.df <- na.omit(finance_forests.df)
 
 ```
 
 ```{r writecsv}
-# write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
+write.csv(GFD_clean, file = "../Data/Processed/finance_forests.csv", row.names=FALSE)
 ```
 
 ## Exploration
 
 ```{r}
-ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest)) + 
+ggplot(finance_forests.df, aes(x = credit.to.private, y = Forest_Share_of_Surface)) + 
   geom_point() +
   geom_smooth(method = 'lm', se = FALSE, color = "darkgreen")
 ```
 
-```{r linear.regression}
-forest.regression <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private)
-summary(forest.regression)
+## Individual MVRs with Each Financial Variable
+
+```{r mvr.ctp}
+forest.regression1 <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ credit.to.private)
+summary(forest.regression1)
 
 ```
 
-```{r, fig.height = 3, fig.width = 4}
+```{r mvr.atg}
+forest.regression2 <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ assets.to.gdp)
+summary(forest.regression2)
+
+```
+
+```{r mvr.res}
+forest.regression3 <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ Reserves)
+summary(forest.regression3)
+
+```
+
+> These are some really awful p-values-- truly
+
+## Residuals and errors
+
+```{r}
 par(mfrow = c(2,2), mar=c(4,4,4,4))
-plot(forest.regression)
+plot(forest.regression1)
 par(mfrow = c(1,1))
 ```
 
+```{r}
+par(mfrow = c(2,2), mar=c(4,4,4,4))
+plot(forest.regression2)
+par(mfrow = c(1,1))
+```
+
+```{r}
+par(mfrow = c(2,2), mar=c(4,4,4,4))
+plot(forest.regression3)
+par(mfrow = c(1,1))
+```
+
+> Very bad looking plots here too :)
+
 ```{r forest.model}
-Forestfinance.AIC <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
+Forestfinance.AIC <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ credit.to.private + assets.to.gdp + Reserves)
  step(Forestfinance.AIC)
  summary(Forestfinance.AIC)
+ 
+# the best result is to eliminate credit.to.private and Reserves, so "forest.regression2" from earlier is the best we'll get
+ 
 
-Forestfinance.MR <- lm(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
+Forestfinance.MR <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ assets.to.gdp)
 summary(Forestfinance.MR)
 
 ```
 
 ```{r}
-Forestfinance.anova <- aov(data = finance_forests.df, Share.of.Surface.Occupied.by.Forest ~ credit.to.private + assets.to.gdp + Reserves)
+Forestfinance.anova <- aov(data = finance_forests.df, Forest_Share_of_Surface ~ assets.to.gdp)
 summary(Forestfinance.anova)
 ```
 
 ```{r scatterplot.2}
-ggplot(finance_forests.df, aes(x = credit.to.private, y = Share.of.Surface.Occupied.by.Forest, color = Country)) + 
+ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Forest_Share_of_Surface)) + 
   geom_point(aes(alpha = 0.5)) +
   geom_smooth(method = 'lm', se = FALSE, aes(color = "green"))
 
