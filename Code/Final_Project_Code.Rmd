@@ -203,7 +203,6 @@ In the multivariate regression with all the variables, we get a slightly signifi
 
 
 
-
 \newpage
 
 # Summary and Conclusions
