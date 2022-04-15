@@ -147,7 +147,11 @@ summary(Forestfinance.anova)
 
 # Analysis
 
+For the individual regressions with each of the financial variables we selected, only the p-value for the assets.to.gdp variable was significant at 0.01295. The adjusted R-squared in this case was 0.052, meaning that the linear model explains 6% of the data. 
 
+From the residual plots, we see that the third regression (for Reserves) had data concentrated highly in the left of most of the plots, making the fitted lines oddly-shaped. The first regression (for assets.to.gdp) seemed to indicate a more normal distribution of data without as many stark outliers. The second (for credit.to.private), suprisingly, seems to have a lot of concentration of data, much like in the third plot.
+
+In the multivariate regression with all the variables, we get a slightly significant p-value less than 0.1, but from the AIC step model we see that the model is better without the Reserves and the assets.to.gdp variables.
 
 ## Question: Do financial indicators correlate to forest coverage for different countries in 2018?
 
