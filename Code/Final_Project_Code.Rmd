@@ -34,6 +34,7 @@ library(zoo)
 library(trend)
 library(readxl)
 library(dplyr)
+library(ggrepel)
 
 # Set your ggplot theme
 mytheme <- theme_classic(base_size = 14) +
@@ -84,7 +85,8 @@ We pulled our data from three databases on the World Bank website: Global Financ
 
 # Exploratory Analysis 
 
-## Individual MVRs with Each Financial Variable
+
+## Individual Linear Regressions with Each Financial Variable
 
 ```{r mvr.ctp}
 forest.regression1 <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ credit.to.private)
@@ -103,6 +105,49 @@ forest.regression3 <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ Re
 summary(forest.regression3)
 
 ```
+
+## Plots of share of surface occupied by foreast on all 3 financial variables
+
+```{r}
+#Plot of Domestic Credit to Private Sector (% of GDP)
+ggplot(finance_forests.df, aes(x = credit.to.private, y = Forest_Share_of_Surface)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 5, 
+                  point.padding = 0.5,
+                  max.overlaps = 50,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkgreen") +
+  labs(x = "Ratio of Domestic Credit Provided by Private Sector to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage and Private Credit")
+```
+
+```{r}
+#Plot of Central Bank Assets to GDP
+ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Forest_Share_of_Surface, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 5, 
+                  point.padding = 0.5,
+                  max.overlaps = 10,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "darkblue")
+  labs(x = "Ratio of Central Bank Assets to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage and Central Bank Assets")
+```
+
+```{r}
+#Plot of Domestic Reserves (Million US$) 
+
+ggplot(finance_forests.df, aes(x = Reserves , y = Forest_Share_of_Surface, label=Country)) + 
+  geom_point() +
+  geom_label_repel(aes(label = Country),
+                  box.padding   = 3, 
+                  point.padding = 0.5,
+                  max.overlaps = 100,
+                  segment.color = 'grey50')+
+  geom_smooth(method = 'lm', se = FALSE, color = "red") +
+  labs(x= 'Total Reserves (Million US$)', y = "Forest Coverage (%)", title = "Forest Coverage and Total Reserves")
+```
+
 
 ## Residuals and Errors
 
@@ -124,7 +169,7 @@ plot(forest.regression3)
 par(mfrow = c(1,1))
 ```
 
-## Selecting a Linear Model
+## Creating a Multivariate Linear Model
 
 ```{r forest.model}
 Forestfinance.AIC <- lm(data = finance_forests.df, Forest_Share_of_Surface ~ credit.to.private + assets.to.gdp + Reserves)
@@ -164,7 +209,5 @@ In the multivariate regression with all the variables, we get a slightly signifi
 # Summary and Conclusions
 
 
-
-## Exploration
 
 
