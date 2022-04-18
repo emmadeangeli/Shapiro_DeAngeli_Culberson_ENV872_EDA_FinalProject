@@ -122,7 +122,7 @@ ggplot(finance_forests.df, aes(x = credit.to.private, y = Forest_Share_of_Surfac
   labs(x = "Domestic Credit Provided by Private Sector to GDP (%)", y = "Forest Coverage (%)", title = "Forest Coverage and Private Credit")
 ```
 
-```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.cap= "Forest Coverage and Central Bank Assets", fig.width = 5.5, fig.height = 3.5}
+```{r fccba, echo=FALSE, message = FALSE, warning=FALSE, fig.cap= "Forest Coverage and Central Bank Assets", fig.width = 5.5, fig.height = 3.5}
 #Plot of Central Bank Assets to GDP
 ggplot(finance_forests.df, aes(x = assets.to.gdp, y = Forest_Share_of_Surface, label=Country)) + 
   geom_point() +
