@@ -16,10 +16,6 @@ mainfont: Times New Roman
 \newpage
 \tableofcontents 
 \newpage
-\listoftables
-\newpage
-\listoffigures 
-\newpage
 
 ```{r setup, include=FALSE}
 # Set your working directory
@@ -62,8 +58,8 @@ finance_forests.df <- na.omit(finance_forests.df)
 
 We were initially interested in whether climate financing correlated to environmental health in various countries. However, we could not find enough data to lead to a robust analysis. Instead, we are looking into whether different financial indicators (in as many countries as we could find) lead specifically to forest coverage. In our project, we are using forest coverage as a proxy for environmental health. Developed countries may have the luxury of being able to preserve their forests. We were particularly interested in seeing if other financial indicators related to forest coverage. Our main research question was "do financial indicators correlate to forest coverage for different countries in 2018?" Therefore, our hypotheses are the following:
 
-$$H_0$$: There are no financial indicators or combination of financial indicators that correlate to forest coverage.
-$$H_a$$: There is at least one financial indicator or combination of financial indicators that correlates to forest coverage.
+$$H_0:$$ There are no financial indicators or combination of financial indicators that correlate to forest coverage.
+$$H_a:$$ There is at least one financial indicator or combination of financial indicators that correlates to forest coverage.
 
 
 \newpage
