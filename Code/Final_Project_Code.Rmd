@@ -66,7 +66,7 @@ $$H_a:$$ There is at least one financial indicator or combination of financial i
 
 # Dataset Information
 
-We pulled our data from three databases on the World Bank website: Global Financial Development, Global Economic Monitor, and Country Climate and Development Report. The first two have variables related to financial and economic data while the third has variables related to climate and development. After initial exploration into the most climate-vulnerable countries, we selected four variables to analyze in the year 2018:
+We pulled our data from three databases on the World Bank website: Global Financial Development, Global Economic Monitor, and Country Climate and Development Report. The first two have variables related to financial and economic data while the third has variables related to climate and development. After transposing the data from the World Bank Website such that each variable has its own column rather than its own row, we joined data from the three sets with a leftjoin() command and then filtered the resulting data set with a na.omit() command. Finally we were left with four selected variables to analyze in the year 2018:
 
 | Dataset                                       | Description                       |
 | :-------------------------------------------- | :-------------------------------- |
