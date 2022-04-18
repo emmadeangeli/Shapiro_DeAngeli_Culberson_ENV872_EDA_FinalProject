@@ -159,9 +159,13 @@ We pulled our data from three databases on the World Bank website:
 Global Financial Development, Global Economic Monitor, and Country
 Climate and Development Report. The first two have variables related to
 financial and economic data while the third has variables related to
-climate and development. After initial exploration into the most
-climate-vulnerable countries, we selected four variables to analyze in
-the year 2018:
+climate and development. After transposing the data from the World Bank
+Website such that each variable has its own column rather than its own
+row, we joined data from the three sets with a leftjoin() command and
+then filtered the resulting data set with a na.omit() command. Finally
+we were left with four selected variables to analyze in the year 2018:
+
+Table 1. Variables
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -291,137 +295,49 @@ Variable}\label{individual-linear-regressions-with-each-financial-variable}}
 ## F-statistic: 0.03518 on 1 and 97 DF,  p-value: 0.8516
 \end{verbatim}
 
-\hypertarget{plots-of-share-of-surface-occupied-by-foreast-on-all-3-financial-variables}{%
-\subsection{Plots of share of surface occupied by foreast on all 3
+\hypertarget{plots-of-share-of-surface-occupied-by-forest-on-all-3-financial-variables}{%
+\subsection{Plots of Share of Surface Occupied by Forest on all 3
 financial
-variables}\label{plots-of-share-of-surface-occupied-by-foreast-on-all-3-financial-variables}}
+variables}\label{plots-of-share-of-surface-occupied-by-forest-on-all-3-financial-variables}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Plot of Domestic Credit to Private Sector (% of GDP)}
-\KeywordTok{ggplot}\NormalTok{(finance_forests.df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ credit.to.private, }\DataTypeTok{y =}\NormalTok{ Forest_Share_of_Surface)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ Country),}
-                  \DataTypeTok{box.padding   =} \DecValTok{5}\NormalTok{, }
-                  \DataTypeTok{point.padding =} \FloatTok{0.5}\NormalTok{,}
-                  \DataTypeTok{max.overlaps =} \DecValTok{50}\NormalTok{,}
-                  \DataTypeTok{segment.color =} \StringTok{'grey50'}\NormalTok{)}\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{color =} \StringTok{"darkgreen"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Ratio of Domestic Credit Provided by Private Sector to GDP (%)"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Forest Coverage (%)"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Forest Coverage and Private Credit"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: ggrepel: 95 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps
-\end{verbatim}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-1-1.pdf}
+\caption{Forest Coverage and Private Credit}
+\end{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Plot of Central Bank Assets to GDP}
-\KeywordTok{ggplot}\NormalTok{(finance_forests.df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ assets.to.gdp, }\DataTypeTok{y =}\NormalTok{ Forest_Share_of_Surface, }\DataTypeTok{label=}\NormalTok{Country)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ Country),}
-                  \DataTypeTok{box.padding   =} \DecValTok{5}\NormalTok{, }
-                  \DataTypeTok{point.padding =} \FloatTok{0.5}\NormalTok{,}
-                  \DataTypeTok{max.overlaps =} \DecValTok{10}\NormalTok{,}
-                  \DataTypeTok{segment.color =} \StringTok{'grey50'}\NormalTok{)}\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{color =} \StringTok{"darkblue"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Ratio of Central Bank Assets to GDP (%)"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Forest Coverage (%)"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Forest Coverage and Central Bank Assets"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: ggrepel: 98 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps
-\end{verbatim}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-2-1.pdf}
+\caption{Forest Coverage and Central Bank Assets}
+\end{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Plot of Domestic Reserves (Million US$) }
-
-\KeywordTok{ggplot}\NormalTok{(finance_forests.df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Reserves , }\DataTypeTok{y =}\NormalTok{ Forest_Share_of_Surface, }\DataTypeTok{label=}\NormalTok{Country)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ Country),}
-                  \DataTypeTok{box.padding   =} \DecValTok{3}\NormalTok{, }
-                  \DataTypeTok{point.padding =} \FloatTok{0.5}\NormalTok{,}
-                  \DataTypeTok{max.overlaps =} \DecValTok{100}\NormalTok{,}
-                  \DataTypeTok{segment.color =} \StringTok{'grey50'}\NormalTok{)}\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=} \StringTok{'Total Reserves (Million US$)'}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Forest Coverage (%)"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Forest Coverage and Total Reserves"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: ggrepel: 79 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps
-\end{verbatim}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-3-1.pdf}
+\caption{Forest Coverage and Total Reserves}
+\end{figure}
 
 \hypertarget{residuals-and-errors}{%
 \subsection{Residuals and Errors}\label{residuals-and-errors}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(forest.regression1)}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-4-1.pdf}
+\caption{Residuals from Private Credit Regression}
+\end{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(forest.regression2)}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-5-1.pdf}
+\caption{Residuals from Central Bank Assets to GDP Regression}
+\end{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(forest.regression3)}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-6-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+\caption{Residuals from Total Reserves Regression}
+\end{figure}
 
 \hypertarget{creating-a-multivariate-linear-model}{%
 \subsection{Creating a Multivariate Linear
@@ -531,20 +447,11 @@ Model}\label{creating-a-multivariate-linear-model}}
 ## F-statistic: 6.411 on 1 and 97 DF,  p-value: 0.01295
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(Forestfinance.MR)}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{figure}
+\centering
 \includegraphics{Final_Project_Code_files/figure-latex/unnamed-chunk-7-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+\caption{Residuals from Multivariate Regression}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
