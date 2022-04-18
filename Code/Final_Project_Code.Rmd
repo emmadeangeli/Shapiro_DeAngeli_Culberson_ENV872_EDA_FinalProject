@@ -72,15 +72,12 @@ $$H_a$$: There is at least one financial indicator or combination of financial i
 
 We pulled our data from three databases on the World Bank website: Global Financial Development, Global Economic Monitor, and Country Climate and Development Report. The first two have variables related to financial and economic data while the third has variables related to climate and development. After initial exploration into the most climate-vulnerable countries, we selected four variables to analyze in the year 2018:
 
----
- - Central Bank Assets to GDP (%)
-    - This variable is equal to a given country's central bank assets          divided by its GDP for the year 2018
- - Domestic Credit to Private Sector (% of GDP)
-    - This variable is equal to the amount of private investment in a          given countries debt divided by that countries GDP for the year          2018.
- - Domestic Reserves (Million US$)
-    - This variable is equal to a given country's monetary reserves held       by its central bank in million USD for the year 2018.
- - **Dependent variable:** Share of surface occupied by forest (%)
----
+| Dataset                                       | Description                       |
+| :-------------------------------------------- | :-------------------------------- |
+| Central Bank Assets to GDP (%)                | This variable is equal to a given country's central bank assets divided by its GDP for the year 2018 | 
+| Domestic Credit to Private Sector (% of GDP)  | This variable is equal to the amount of private investment in a given countries debt divided by that countries GDP for the year 2018 | 
+|Domestic Reserves (Million US$)                | This variable is equal to a given country's monetary reserves held by its central bank in million USD for the year 2018 | 
+| **Dependent variable:**                       | Share of surface occupied by forest (%) | 
 
 
 \newpage
@@ -216,7 +213,10 @@ When we put all three explanatory financial variables together in a multivariate
 \newpage
 
 # Summary and Conclusions
-(we reject the null hypothesis at the 0.05 level, the Central Bank Assets to GDP does have a statistically significant correlation with Share of Forest Coverage)
+
+In summary, we reject the null hypothesis at the 0.05 level that there are no financial indicators or combination of financial indicators that correlate to forest coverage. Through our multiple linear regression, we find that the Central Bank Assets to GDP does have a statistically significant correlation with Share of Forest Coverage (p = 0.0129). 
+
+With our result, we can answer that yes, financial indicators correlate with various countries' forest coverage in 2018. While there is a statistically significant correlation, there are limitations to our analysis and we cannot reliably conclude where the causation of the correlation originates. Our analysis does not consider the exhaustive list of variables contributing to a country's forest cover, but it does provide some insight into the statistical relationship between financial indicators and environmental variables. Further research including additional financial indicators or environmental responses may be warranted. 
 
 
 
