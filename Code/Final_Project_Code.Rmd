@@ -16,7 +16,7 @@ mainfont: Times New Roman
 \newpage
 \tableofcontents 
 \newpage
-\listoftables 
+\listoftables
 \newpage
 \listoffigures 
 \newpage
@@ -208,7 +208,7 @@ When we put all three explanatory financial variables together in a multivariate
 
 ## Question: Do financial indicators correlate to forest coverage for different countries in 2018?
 
-
+As stated in our analysis, at least the Central Bank Assets to GDP has a statistically significant correlation with Share of Forest Coverage.
 
 \newpage
 
