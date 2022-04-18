@@ -203,19 +203,20 @@ After running 3 individual linear regressions with each of the financial variabl
 
 After running these linear regressions, we plotted the Share of Surface Occupied by Forest on each explanatory financial variable in 3 separate scatterplots. On each scatterplot, we also plotted the fitted linear regression. In all three plots, it becomes clear the low adjusted R-squared values from our regressions were appropriate. The fitted linear regressions do not appear to explain much of the variation in our dependent variable. In the case of the Forest Coverage and Private Credit and Forest Coverage and Total Reserves plots, the linear fit does an exceptionally poor job of relating the explanatory variables to the Share of Surface Occupied by Forest dependent variable. Only for the Forest Coverage and Central Bank Assets plot does the fitted linear regression seem to make sense and even in this case, there is stil a considerable amount of the data that the fitted regression does not explain.
 
-From the residual plots of these 3 individual linear regressions, we see that the second and third regressions (for the Total Reserves explanatory variable and the Assets to GDP explanatory variable, respectively) had residuals concentrated highly on the left hand side of the plots, and had fitted lines that did little to minimize the magnitude of these residuals. These two observations indicate that our models are poorly fited. The first regression (for the Domestic Credit to Private Sector explanatory variable) seemed to indicate a more normal distribution of data without as many stark outliers. The second regression (for the Assets to GDP explanatory variable) surprisingly seems to have a lot of concentration of data, much like in the third plot.
+From the residual plots of these 3 individual linear regressions, we see that the second and third regressions (for the Total Reserves explanatory variable and the Assets to GDP explanatory variable, respectively) had residuals concentrated highly on the left hand side of the plots, and had fitted lines that did little to minimize the magnitude of these residuals. These two observations indicate that our models are not well fitted, and the corresponding adjusted-R squared values align with that indication. The first regression on the hand (for the Domestic Credit to Private Sector explanatory variable), seemed to indicate a better fitting model. In this case, there is less drastic asymmetry in the residuals and the residuals are much closer to zero than the other two regressions. However, the output for this single variable regression still shows that the model does not do a good job of fitting the data.
 
-In the multivariate regression with all the variables, we get a slightly significant p-value less than 0.1, but from the AIC step model we see that the model is better without the Reserves and the assets.to.gdp variables.
+When we put all three explanatory financial variables together in a multivariate regression, we use the Akaike's Information Criterion (AIC) to select which variables are useful.  After just 3 steps, the AIC tells us that the only needed explanatory financial variable is the Central Bank Assets to GDP ratio. In other words, the Total Reserves explanatory variable and the Domestic Credit to Private Sector explanatory variable are not terribly useful in modeling the Share Forest Coverage, possibly because they co-vary with other explanatory variables. The full multivariate linear model with all 3 financial variables still has an F-statistic that is somewhat statistically significant at the 0.1 level, but the regression with only the Central Bank Assets to GDP ratio has an F-statistic significant at the 0.05 level (equal to the p-value of the Central Bank Assets to GDP variable). Our integration of our final model then, is equivalent to the interpretation of single variable regression for Central Bank Assets to GDP (they are the same model). A 1% increase in the Assets to GDP Ratio of a given country is correlated with a 0.56% increase in the share of that country's surface covered by forest. Any change in our other explanatory variables has no statistically significant correlation with the Share of Forest Coverage according to the models we run.
+
+
 
 ## Question: Do financial indicators correlate to forest coverage for different countries in 2018?
-
 
 
 
 \newpage
 
 # Summary and Conclusions
-
+(we reject the null hypothesis at the 0.05 level, the Central Bank Assets to GDP does have a statistically significant correlation with Share of Forest Coverage)
 
 
 
